@@ -1,0 +1,14 @@
+{
+  "name": "entrega2",
+  "version": "1.0.0",
+  "description": "Second challenge for Coderhouse",
+  "main": "container.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "files"
+  ],
+  "author": "Juan Ignacio Torres",
+  "license": "ISC"
+}

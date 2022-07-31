@@ -1,0 +1,22 @@
+[
+    {
+        "title": "MacBook Air M1 13",
+        "price": 378099,
+        "id": 1
+    },
+    {
+        "title": "iPhone 13 Pro Max",
+        "price": 579991,
+        "id": 2
+    },
+    {
+        "title": "iPhone 13 Pro",
+        "price": 536991,
+        "id": 3
+    },
+    {
+        "title": "iPhone 13",
+        "price": 429592,
+        "id": 4
+    }
+]
