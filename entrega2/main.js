@@ -1,4 +1,4 @@
-const Container = require('./Container');
+const Container = require('./src/container');
 
 const container = new Container("products.json");
 

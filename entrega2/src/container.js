@@ -46,6 +46,7 @@ async save(Product) {
 }
 
 async getById(id) {
+    id = Number(id);
     try {
         const data = await this.getData();
         const parsed = JSON.parse(data);
@@ -65,6 +66,7 @@ async getAll() {
 }
 
 async deleteById(id) {
+    id = Number(id);
     try {
         const data = await this.getData(); 
         const parsed = JSON.parse(data);
@@ -96,6 +98,33 @@ async deleteAll() {
         console.log(
             `An error occurred when trying to delete the information`
         );
+    }
+}
+
+async updateProductById(id, dataToUpdate) {
+    id = Number(id);
+    try {
+      const data = await this.getData();
+      const parsed = JSON.parse(data);
+      const productToBeUpdated = parsed.find(
+        (product) => product.id === id
+      );
+      if (productToBeUpdated) {
+        const index = parsed.indexOf(productToBeUpdated);
+        const {title, price, thumbnail} = dataToUpdate;
+
+        parsed[index]['title'] = title;
+        parsed[index]['price'] = price;
+        parsed[index]['thumbnail'] = thumbnail;
+        await fs.promises.writeFile(this._filename, JSON.stringify(parsed));
+        return true;
+      } else {
+        console.log(`The product with ID ${id} couldn't be found`);
+        return null;
+      }
+
+    } catch (error) {
+      `Error Code: ${error.code} There was an error while trying to update a product by the ID (${id})`
     }
 }
 
