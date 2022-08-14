@@ -124,8 +124,7 @@ async updateProductById(id, dataToUpdate) {
       }
 
     } catch (error) {
-        console.log(error)
-        //`Error Code: ${error.code} There was an error while trying to update a product by the ID (${id})`
+        console.log(`Error Code: ${error.code} There was an error while trying to update a product by the ID (${id})`);
     }
 }
 
