@@ -117,7 +117,6 @@ async updateProductById(id, dataToUpdate) {
         parsed[index].price = price;
         parsed[index].thumbnail = thumbnail;
         await fs.promises.writeFile(this.fileName, JSON.stringify(parsed));
-        console.log("Hola")
         return true;
       } else {
         console.log(`The product with ID ${id} couldn't be found`);
