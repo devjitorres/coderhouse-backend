@@ -50,7 +50,6 @@ async getById(id) {
     try {
         const data = await this.getData();
         const parsed = JSON.parse(data);
-
         return parsed.find((product) => product.id === id);
     }
     catch (error) {
@@ -78,6 +77,7 @@ async deleteById(id) {
             const index = parsed.indexOf(objectToRemove);
             parsed.splice(index, 1) //deletes element
             await fs.promises.writeFile(this.fileName, JSON.stringify(parsed)); 
+            return objectToRemove;
         }
         else {
             console.log(`The element with ID ${id} doesn't exist`);
@@ -113,10 +113,11 @@ async updateProductById(id, dataToUpdate) {
         const index = parsed.indexOf(productToBeUpdated);
         const {title, price, thumbnail} = dataToUpdate;
 
-        parsed[index]['title'] = title;
-        parsed[index]['price'] = price;
-        parsed[index]['thumbnail'] = thumbnail;
-        await fs.promises.writeFile(this._filename, JSON.stringify(parsed));
+        parsed[index].title = title;
+        parsed[index].price = price;
+        parsed[index].thumbnail = thumbnail;
+        await fs.promises.writeFile(this.fileName, JSON.stringify(parsed));
+        console.log("Hola")
         return true;
       } else {
         console.log(`The product with ID ${id} couldn't be found`);
@@ -124,7 +125,8 @@ async updateProductById(id, dataToUpdate) {
       }
 
     } catch (error) {
-      `Error Code: ${error.code} There was an error while trying to update a product by the ID (${id})`
+        console.log(error)
+        //`Error Code: ${error.code} There was an error while trying to update a product by the ID (${id})`
     }
 }
 

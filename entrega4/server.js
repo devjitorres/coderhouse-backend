@@ -2,11 +2,13 @@ const Container = require('./src/container')
 const express = require('express');
 const app = express();
 const PORT = 8080;
+const morgan = require ('morgan');
 const container = new Container('products.json');
 
 app.use(express.static('public'));
 
 app.use(express.json());
+app.use(morgan('dev'));
 app.use(express.urlencoded({extended:true}));
 
 const router = express.Router();
@@ -17,15 +19,6 @@ router.get('/', async (req, res) => {
     res.status(200).json(products);
 })
 
-/* router.get('/:id', async (req, res) => {
-    const {id} = req.params;
-    const product = await container.getById(id);
-
-    product 
-        ? res.status(200).json(product)
-        : res.status(404).json({error: 'Product not found'})
-
-}) */
 
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
@@ -56,6 +49,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const {id} = req.params;
     const deletedProduct = await container.deleteById(id);
+    console.log(deletedProduct)
     deletedProduct
         ? res.status(200).send(`Product with ID ${id} was deleted`)
         : res.status(404).send(`Product with ID ${id} couldn't be deleted because it doesn't exist`);
